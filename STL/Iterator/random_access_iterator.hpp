@@ -21,7 +21,7 @@ namespace ft
 		pointer	ptr;
 
 	public:		
-		random_access_iterator(void): ptr(nullptr){};
+		random_access_iterator(void): ptr(0){};
 		random_access_iterator(pointer _ptr): ptr(_ptr){}
 		random_access_iterator(const random_access_iterator &src) : ptr(src.ptr){}
 		~random_access_iterator() {}
@@ -135,6 +135,12 @@ namespace ft
 	typename random_access_iterator<T>::difference_type operator-(const random_access_iterator<T> &lhs, const random_access_iterator<T> &rhs)
 	{
 		return lhs.ptr - rhs.ptr;
+	}
+
+	template<typename T>
+	typename random_access_iterator<T>::difference_type operator-(const random_access_iterator<T> &src)
+	{
+		return this->ptr - src.ptr;
 	}
 
 	template<typename T>
