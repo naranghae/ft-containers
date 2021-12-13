@@ -50,14 +50,21 @@ namespace ft
 						const allocator_type& _alloc = allocator_type())
 			: alloc(_alloc), base(0), size(0), capacity(0) // vector<T>(n)
 		{
-
+			this->assign(n, val);
 		}
 		
 		template<class InputIterator>
-		Vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
-		
-		Vector(const Vector &x);
+		Vector(InputIterator first, InputIterator last, 
+					const allocator_type& _alloc = allocator_type())
+			: alloc(_alloc), base(0), size(0), capacity(0)
+		{
+			this->assign(first, last);
+		}
 
+		Vector(const Vector &x): alloc(x.alloc), base(0), size(0), capacity(0)
+		{
+			this->assign(x.begin(), x.end());
+		}
 		//destructor
 		~vector()
 		{
@@ -164,12 +171,28 @@ namespace ft
 		}
 
 		//operator[]
-		reference operator[](size_type n);
-		const_reference operator[](size_type n) const;
+		reference operator[](size_type n)
+		{
+			return this->base[n];
+		}
+		const_reference operator[](size_type n) const
+		{
+			return this->base[n];
+		}
 		
 		//at
-		reference at(size_type n);
-		const_reference at(size_type n) const;
+		reference at(size_type n)
+		{
+			if (n >= this->size)
+				throw std::out_of_range("Index Range Error");
+			return this->base[n];
+		}
+		const_reference at(size_type n) const
+		{
+			if (n >= this->size)
+				throw std::out_of_range("Index Range Error");
+			return this->base[n];
+		}
 
 		//front
 		reference front(size_type n)
@@ -193,9 +216,24 @@ namespace ft
 
 		//assign
 		template<class InputIterator>
-		void assign(InputIterator first, InputIterator last);
+		void assign(InputIterator first, InputIterator last)
+		{
+			difference_type n = last - first;
+			this->clear();
+			this->reserve(n);
+			for(size_type i = 0; i < n; i++)
+				this->alloc.construct(&base[i], first.base[i]);
+			this->size = n;
+		}
 
-		void assign(size_type n, const value_type& val);
+		void assign(size_type n, const value_type& val) //val:value, n: count
+		{
+			this->clear();
+			this->reserve(n);
+			for(size_type i = 0; i < n; i++)
+				this->alloc.construct(&base[i], val);
+			this->size = n;
+		}
 
 		//push_back
 		void push_back(const value_type& val)
@@ -258,7 +296,7 @@ namespace ft
 			difference_type start = first - this->begin();
 			difference_type end = start + range;
 			for(difference_type i = start; i < end; i++)
-				this->alloc.destroy(base + i);
+				this->alloc.destroy(&base[i]);
 			for (difference_type i = end; i < this->size(); i++)
 			{
 				this->alloc.construct(&base[i - range], base[i]);
@@ -302,28 +340,45 @@ namespace ft
 	//relational operator (==, !=, <, <=, >, >=)
 	template<class T, class Alloc>
 	bool operator==(const Vector<T, Alloc>& lhs, 
-					const Vector<T, Alloc>& rhs);
+					const Vector<T, Alloc>& rhs)
+	{
+		return ((lhs.size() == rhs.size()) && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	}
 
 	template<class T, class Alloc>
 	bool operator!=(const Vector<T, Alloc>& lhs,
-					const Vector<T, Alloc>& rhs);
+					const Vector<T, Alloc>& rhs)
+	{
+		return (!(lhs == rhs));
+	}
 
 	template<class T, class Alloc>
 	bool operator<(const Vector<T, Alloc>& lhs, 
-					const Vector<T, Alloc>& rhs);
+					const Vector<T, Alloc>& rhs)
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
 
 	template<class T, class Alloc>
 	bool operator<=(const Vector<T, Alloc>& lhs,
-					const Vector<T, Alloc>& rhs);
+					const Vector<T, Alloc>& rhs)
+	{
+		return !(rhs < lhs);
+	}
 
 	template<class T, class Alloc>
 	bool operator>(const Vector<T, Alloc>& lhs,
-					const Vector<T, Alloc>& rhs);
+					const Vector<T, Alloc>& rhs)
+	{
+		return rhs < lhs;
+	}
 
 	template<class T, class Alloc>
 	bool operator>=(const Vector<T, Alloc>& lhs,
-					const Vector<T, Alloc>& rhs);
-
+					const Vector<T, Alloc>& rhs)
+	{
+		return !(lhs < rhs);
+	}
 	
 	//swap
 	template<class T, class Alloc>
