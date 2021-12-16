@@ -1,7 +1,9 @@
 #include <vector>
 #include <iostream>
-#include <type_traits>
-//#include "vector.hpp"
+#include <deque>
+#include <list>
+#include <stack>
+//#include "STL/Containers/vector.hpp"
 
 bool mypredicate(int i, int j)
 {
@@ -15,12 +17,30 @@ bool mycomp(char c1, char c2)
 
 int	main()
 {
-	std::vector<int> v(10);
+	std::vector<int> v;
 	//ft::vector<int> v3(10);
-	for(std::vector<int>::size_type i = 0; i < v.size() ;i++)
-		v[i] = 1+i;
+	//v.reserve(14);	
+	//std::cout << " " << v.size()<< " "  << v.capacity()<< std::endl;
+
+	for(std::vector<int>::size_type i = 0; i < 10 ;i++)
+		v.push_back(i + 1);
+	//for(std::vector<int>::size_type i = 0;i < v.capacity();i++)
+	//	std::cout << v3[i]<< " " << v3.size()<< " "  << v3.capacity()<< std::endl;
+	std::cout << std::endl;
+	// v.reserve(3);
+	//v.insert(it,11,100);
+	//v.assign(5,100);
+	for(std::vector<int>::size_type i = 0;i < v.size();i++)
+		std::cout << v[i] << " " << v.size() << " " << v.capacity()<< std::endl;
+	std::cout << std::endl;
+	// v.erase(v.begin() + 1, v.begin() + 3);
+	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
+	// 	std::cout << v[i] << " " << v.size() << " " << v.capacity()<< std::endl;
+
 	// for(ft::vector<int>::size_type i = 0; i < v3.size() ;i++)
 	// 	v3[i] = 1+i;
+	std::cout << std::endl;
+	// v.reserve(0);
 	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
 	// 	std::cout << v[i] << " " << v.size() << " " << v.capacity()<< std::endl;
 	// std::cout << std::endl;
@@ -33,13 +53,8 @@ int	main()
 	// 	else
 	// 		v2[i] = 11+i;
 	// }
-	// std::vector<int>::iterator it;
-	// it = v.begin() + 1;
 
-	// v.resize(7, 10);
-	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
-	// 	std::cout << v[i] << " " << v.size() << " " << v.capacity()<< std::endl;
-	// std::cout << std::endl;
+
 	// v.resize(5);
 	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
 	// 	std::cout << v[i] << " " << v.size()<< " "  << v.capacity()<< std::endl;
@@ -47,10 +62,18 @@ int	main()
 	// v.resize(7);
 	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
 	// 	std::cout << v[i]<< " " << v.size()<< " "  << v.capacity()<< std::endl;
-	// std::cout << std::endl;	
-	// v.resize(15);
+	// std::cout << std::endl;
+	// v.reserve(2);	
 	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
 	// 	std::cout << v[i]<< " " << v.size()<< " "  << v.capacity()<< std::endl;
+	// std::cout << std::endl;
+	// v.resize(13);
+	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
+	// 	std::cout << v[i]<< " " << v.size()<< " "  << v.capacity()<< std::endl;
+	// std::cout << std::endl;
+	// v.resize(15, 11);
+	// for(std::vector<int>::size_type i = 0;i < v.size();i++)
+	// 	std::cout << v[i] << " " << v.size() << " " << v.capacity()<< std::endl;
 	// std::cout << std::endl;
 	// v.resize(4);
 	// for(std::vector<int>::size_type i = 0;i < v.size();i++)

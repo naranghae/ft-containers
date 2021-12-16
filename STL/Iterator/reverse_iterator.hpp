@@ -11,8 +11,8 @@ namespace ft
 	public:
 		typedef Iterator 												iterator_type;
 		typedef	typename iterators_traits<Iterator>::iterator_category	iterator_category;
-		typedef	typename terators_traits<Iterator>::value_type			value_type;
-		typedef	typename terators_traits<Iterator>::difference_type		difference_type;
+		typedef	typename iterators_traits<Iterator>::value_type			value_type;
+		typedef	typename iterators_traits<Iterator>::difference_type		difference_type;
 		typedef typename iterators_traits<Iterator>::pointer			pointer;
 		typedef	typename iterators_traits<Iterator>::reference			reference;
 

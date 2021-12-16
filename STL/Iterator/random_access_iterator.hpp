@@ -52,52 +52,52 @@ namespace ft
 			return this->ptr;
 		}
 
-		random_access_iterator<T>	&operator++() //prefix
+		random_access_iterator	&operator++() //prefix
 		{
 			ptr++;
 			return *this;
 		}
 
-		random_access_iterator<T>	operator++(int) //postfix
+		random_access_iterator	operator++(int) //postfix
 		{
-			random_access_iterator<T> post = *this;
+			random_access_iterator post = *this;
 			this->ptr++;
 			return post;
 		}
 
-		random_access_iterator<T>	&operator--()
+		random_access_iterator	&operator--()
 		{
 			ptr--;
 			return *this;
 		}
 	
-		random_access_iterator<T>	operator--(int)
+		random_access_iterator	operator--(int)
 		{
-			random_access_iterator<T> post = *this;
+			random_access_iterator post = *this;
 			this->ptr--;
 			return post;
 		}
 	
-		random_access_iterator<T>	operator+(difference_type n) const
+		random_access_iterator	operator+(difference_type n) const
 		{
 			random_access_iterator tmp(*this);
 			tmp.ptr += n;
 			return tmp;
 		}
 
-		random_access_iterator<T>	operator-(difference_type n) const
+		random_access_iterator	operator-(difference_type n) const
 		{
 			random_access_iterator tmp(*this);
 			tmp.ptr -= n;
 			return tmp;
 		}
 
-		random_access_iterator<T>	&operator+=(difference_type n)
+		random_access_iterator	&operator+=(difference_type n)
 		{
 			this->ptr += n;
 			return *this;
 		}
-		random_access_iterator<T>	&operator-=(difference_type n)
+		random_access_iterator	&operator-=(difference_type n)
 		{
 			this->ptr -= n;
 			return *this;

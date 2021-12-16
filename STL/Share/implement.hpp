@@ -20,7 +20,7 @@ namespace ft
 		static const T 					value = v;
 		typedef T 						value_type;
 		typedef integral_constant<T, v> type;
-		const operator T() {return v;}
+		operator T() {return v;}
 	};
 
 	typedef integral_constant<bool, true> true_type;
@@ -32,10 +32,6 @@ namespace ft
 	struct is_integral<bool>: public true_type {};
 	template<>
 	struct is_integral<char>: public true_type {};
-	template<>
-	struct is_integral<char16_t>: public true_type {};
-	template<>
-	struct is_integral<char32_t>: public true_type {};
 	template<>
 	struct is_integral<wchar_t>: public true_type {};
 	template<>
